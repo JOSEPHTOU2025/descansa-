@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descansa FC - Página Oficial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #0ea5e9;
+            --accent-color: #f59e0b;
+            --dark-color: #0f172a;
+            --light-color: #f1f5f9;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 2rem;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+            font-size: 24px;
+            color: var(--primary-color);
+            border: 3px solid var(--accent-color);
+        }
+        
+        .team-info h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .lema {
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        nav {
+            background-color: var(--dark-color);
+            padding: 1rem 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        /* Estilos para el calendario de partidos */
+        .partidos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .partido-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .partido-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .partido-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .partido-imagen {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .partido-equipos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+        }
+        
+        .equipo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 40%;
+        }
+        
+        .equipo-logo {
+
+            width: 60px;
+            height: 60px;
+            background-color: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            color: var(--primary-color);
+        }
+        
+        .descansa-logo {
+            border: 2px solid var(--accent-color);
+        }
+        
+        .vs {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark-color);
+        }
+        
+        .partido-info {
+            padding: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .estadio {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #4b5563;
+        }
+        
+        .estadio i {
+            margin-right: 10px;
+        }
+        
+        .countdown {
+            background-color: #f3f4f6;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        /* Estilos para el formulario de registro */
+        .formulario-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #1e3a8a;
+        }
+        
+        .message {
+            margin-top: 1rem;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        
+        .error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #f87171;
+        }
+        
+        .success {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+        
+        /* Tabla de jugadores registrados */
+        .jugadores-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .jugadores-table th {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: left;
+            padding: 12px 15px;
+        }
+        
+        .jugadores-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .jugadores-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .jugadores-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        
+        .numeros-disponibles {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .numero-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+        
+        .disponible {
+            background-color: #dcfce7;
+            color: #15803d;
+        }
+        
+        .ocupado {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            text-decoration: line-through;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            gap: 1.5rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .partidos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <div class="">DFC
+                    <img src="img/team-logo.png" alt="Logo Descansa FC" class="logo">
+                </div>
+            </div>
+            <div class="team-info">
+                <h1>Descansa FC</h1>
+                <p class="lema">Somos más que un club, somos una familia. Unidos por la pasión del fútbol y el espíritu deportivo.</p>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#partidos">Partidos</a></li>
+            <li><a href="#registro">Registro de Jugadores</a></li>
+            <li><a href="#equipo">Nuestro Equipo</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="partidos">
+            <h2>Próximos Partidos</h2>
+            <div class="partidos-grid">
+                <!-- Partido 1 -->
+                <div class="partido-card">
+                    <img src="" alt="Vista del estadio" class="partido-imagen">
+                    <div class="partido-header">
+                        <div>1 Marzo 2025 - 20:00</div>
+                        <div>Liga Municipal</div>
+                    </div>
+                    <div class="partido-equipos">
+                        <div class="equipo">
+                            <div class="equipo-logo descansa-logo"><img src="img/team-logo.png" alt="Logo Descansa FC" class="logo"></div>
+                            <div>Descansa FC</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="equipo">
+                            <div class="equipo-logo"><img src="img/HDR.jpg" alt="Logo Descansa FC" class="logo"></div>
+                            <div>Dep. Morelos</div>
+                        </div>
+                    </div>
+                    <div class="partido-info">
+                        <div class="estadio">
+                            <i>🏟️</i> Cancha Panteón .
+                        </div>
+                        <div class="countdown" data-fecha="Mar 1, 2025 20:00:00">
+                            Faltan: 2 días,  20 horas, 47 minutos
+                        </div>
+                    </div>
+                </div>
+                
+                
+        
+        <section id="registro" class="formulario-section">
+            <h2>Registro de Jugadores</h2>
+            <form id="registro-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="posicion">Posición</label>
+                    <select id="posicion" name="posicion" required>
+                        <option value="">Selecciona una posición</option>
+                        <option value="Portero">Portero</option>
+                        <option value="Defensa Central">Defensa Central</option>
+                        <option value="Lateral Derecho">Lateral Derecho</option>
+                        <option value="Lateral Izquierdo">Lateral Izquierdo</option>
+                        <option value="Mediocampista Defensivo">Mediocampista Defensivo</option>
+                        <option value="Mediocampista Central">Mediocampista Central</option>
+                        <option value="Mediocampista Ofensivo">Mediocampista Ofensivo</option>
+                        <option value="Extremo Derecho">Extremo Derecho</option>
+                        <option value="Extremo Izquierdo">Extremo Izquierdo</option>
+                        <option value="Delantero Centro">Delantero Centro</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="numero">Número de Camiseta</label>
+                    <input type="number" id="numero" name="numero" min="1" max="99" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Registrar Jugador</button>
+            </form>
+            
+            <div id="mensaje" class="message" style="display: none;"></div>
+            
+            <h3 style="margin-top: 2rem;">Números Disponibles</h3>
+            <div class="numeros-disponibles" id="numeros-container">
+                <!-- Los números se generarán con JavaScript -->
+            </div>
+            
+            <h3 style="margin-top: 2rem;">Jugadores Registrados</h3>
+            <table class="jugadores-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Posición</th>
+                        <th>Número</th>
+                    </tr>
+                </thead>
+                <tbody id="jugadores-lista">
+                    <!-- Aquí se mostrarán los jugadores registrados -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <h3>Descansa FC</h3>
+            <p>Somos más que un club, somos una familia. Unidos por la pasión del fútbol y el espíritu deportivo.</p>
+            <div class="social-links">
+                <a href="#"><span>📱</span></a>
+                <a href="#"><span>💻</span></a>
+                <a href="#"><span>📷</span></a>
+            </div>
+            <p style="margin-top: 1rem;">&copy; 2025 Descansa FC. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Array para almacenar jugadores registrados
+        let jugadores = [
+            { nombre: "Juan Jesus", posicion: "Portero", numero: 36 },
+            { nombre: "Felipe Dircio", posicion: "Mediocampista Central", numero: 8 },
+            { nombre: "Joseph Angel", posicion: "Defensa lateral iz", numero: 6 },
+            { nombre: "Cesar Garcia", posicion: "Defensa Central", numero: 43 },
+            { nombre: "Jabin Cantu", posicion: "Extremo Derecho",  numero: 7 }
+        ];
+        
+        // Actualizar contadores de tiempo para partidos
+        function actualizarContadores() {
+            const contadores = document.querySelectorAll('.countdown');
+            
+            contadores.forEach(contador => {
+                const fechaPartido = new Date(contador.getAttribute('data-fecha')).getTime();
+                const ahora = new Date().getTime();
+                const diferencia = fechaPartido - ahora;
+                
+                if (diferencia > 0) {
+                    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+                    
+                    contador.innerHTML = `Faltan: ${dias} días, ${horas} horas, ${minutos} minutos`;
+                } else {
+                    contador.innerHTML = "¡El partido ya comenzó!";
+                    contador.style.backgroundColor = "#fee2e2";
+                    contador.style.color = "#b91c1c";
+                }
+            });
+        }
+        
+        // Función para mostrar los números disponibles y ocupados
+        function mostrarNumeros() {
+            const numerosContainer = document.getElementById('numeros-container');
+            numerosContainer.innerHTML = '';
+            
+            const numerosOcupados = jugadores.map(jugador => jugador.numero);
+            
+            for (let i = 1; i <= 99; i++) {
+                const numeroElement = document.createElement('div');
+                numeroElement.textContent = i;
+                numeroElement.classList.add('numero-item');
+                
+                if (numerosOcupados.includes(i)) {
+                    numeroElement.classList.add('ocupado');
+                } else {
+                    numeroElement.classList.add('disponible');
+                }
+                
+                numerosContainer.appendChild(numeroElement);
+            }
+        }
+        
+        // Función para mostrar la lista de jugadores
+        function mostrarJugadores() {
+            const jugadoresLista = document.getElementById('jugadores-lista');
+            jugadoresLista.innerHTML = '';
+            
+            jugadores.forEach(jugador => {
+                const fila = document.createElement('tr');
+                
+                const nombreCell = document.createElement('td');
+                nombreCell.textContent = jugador.nombre;
+                
+                const posicionCell = document.createElement('td');
+                posicionCell.textContent = jugador.posicion;
+                
+                const numeroCell = document.createElement('td');
+                numeroCell.textContent = jugador.numero;
+                
+                fila.appendChild(nombreCell);
+                fila.appendChild(posicionCell);
+                fila.appendChild(numeroCell);
+                
+                jugadoresLista.appendChild(fila);
+            });
+        }
+        
+        // Función para mostrar mensaje
+        function mostrarMensaje(texto, tipo) {
+            const mensaje = document.getElementById('mensaje');
+            mensaje.textContent = texto;
+            mensaje.className = 'message ' + tipo;
+            mensaje.style.display = 'block';
+            
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                mensaje.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Manejar envío del formulario
+        document.getElementById('registro-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const posicion = document.getElementById('posicion').value;
+            const numero = parseInt(document.getElementById('numero').value);
+            
+            // Validar que el número no esté ocupado
+            const numeroOcupado = jugadores.some(jugador => jugador.numero === numero);
+            
+            if (numeroOcupado) {
+                mostrarMensaje(`El número ${numero} ya está ocupado. Por favor, elige otro número.`, 'error');
+                return;
+            }
+            
+            // Agregar nuevo jugador
+            jugadores.push({ nombre, posicion, numero });
+            
+            // Actualizar la interfaz
+            mostrarJugadores();
+            mostrarNumeros();
+            
+            // Mostrar mensaje de éxito
+            mostrarMensaje(`¡Jugador ${nombre} registrado con éxito con el número ${numero}!`, 'success');
+            
+            // Limpiar formulario
+            document.getElementById('registro-form').reset();
+        });
+        
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            actualizarContadores();
+            mostrarJugadores();
+            mostrarNumeros();
+            
+            // Actualizar contadores cada minuto
+            setInterval(actualizarContadores, 60000);
+        });
+    </script>
+</body>
+</html>
